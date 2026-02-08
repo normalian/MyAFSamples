@@ -4,6 +4,8 @@ This template demonstrates an AI agent that helps users take surveys using adapt
 
 The app template is built using the Microsoft 365 Agents SDK and Semantic Kernel, which provides the capabilities to build AI-based applications with structured outputs and adaptive card responses.
 
+![](img/fig01.png) 
+
 ## Quick Start
 
 **Prerequisites**

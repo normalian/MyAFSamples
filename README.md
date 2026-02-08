@@ -203,7 +203,7 @@ A Microsoft Teams agent application that combines adaptive cards with Teams app 
 
 **What it does**: Demonstrates how to build an agent application for Microsoft Teams using adaptive cards for rich, interactive user experiences.
 
-For detailed setup instructions and configuration, please refer to the [Sample09M365Agent README](Sample09M365Agent/README.md).
+For detailed setup instructions and configuration, please refer to the [Sample09M365Agent README](Sample09M365Agent/M365Agent/README.md).
 
 ---
 

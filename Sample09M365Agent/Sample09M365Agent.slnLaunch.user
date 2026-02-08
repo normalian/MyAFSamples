@@ -1,0 +1,87 @@
+[
+  {
+    "Name": "Microsoft 365 Agents Playground (browser)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.atkproj",
+        "Name": "M365Agent\\M365Agent.atkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft 365 Agents Playground (browser)"
+      },
+      {
+        "Path": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Name": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Action": "Start",
+        "DebugTarget": "Microsoft 365 Agents Playground"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.atkproj",
+        "Name": "M365Agent\\M365Agent.atkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser)"
+      },
+      {
+        "Path": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Name": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft Teams (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.atkproj",
+        "Name": "M365Agent\\M365Agent.atkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft Teams (browser) (skip update app)"
+      },
+      {
+        "Path": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Name": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft 365 Copilot (browser)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.atkproj",
+        "Name": "M365Agent\\M365Agent.atkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft 365 Copilot (browser)"
+      },
+      {
+        "Path": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Name": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  },
+  {
+    "Name": "Microsoft 365 Copilot (browser) (skip update app)",
+    "Projects": [
+      {
+        "Path": "M365Agent\\M365Agent.atkproj",
+        "Name": "M365Agent\\M365Agent.atkproj",
+        "Action": "StartWithoutDebugging",
+        "DebugTarget": "Microsoft 365 Copilot (browser) (skip update app)"
+      },
+      {
+        "Path": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Name": "Sample09M365Agent\\Sample09M365Agent.csproj",
+        "Action": "Start",
+        "DebugTarget": "Start Project"
+      }
+    ]
+  }
+]

@@ -191,6 +191,22 @@ Configure your MCP client to connect to the function app endpoint and invoke the
 
 ---
 
+### Sample09M365Agent - Microsoft Teams Agent App
+**Location**: `Sample09M365Agent/`
+
+A Microsoft Teams agent application that combines adaptive cards with Teams app capabilities.
+
+**Key Features**:
+- Adaptive Card-based interactive UI
+- Teams app integration
+- Agent-powered conversational experience
+
+**What it does**: Demonstrates how to build an agent application for Microsoft Teams using adaptive cards for rich, interactive user experiences.
+
+For detailed setup instructions and configuration, please refer to the [Sample09M365Agent README](Sample09M365Agent/README.md).
+
+---
+
 ## Key Dependencies
 
 All projects use:
@@ -229,6 +245,7 @@ Recommended order to explore the samples:
 6. **Sample06** - Build complex multi-agent workflows
 7. **Sample07** - Deploy to Azure Functions (basic)
 8. **Sample08** - Create MCP-enabled agents in Azure Functions
+9. **Sample09** - Build Teams agent apps with adaptive cards
 
 ## Resources
 

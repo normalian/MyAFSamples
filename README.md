@@ -207,6 +207,31 @@ For detailed setup instructions and configuration, please refer to the [Sample09
 
 ---
 
+### Sample10GitHubCopilotApp - GitHub Copilot Integration
+**Location**: `Sample10GitHubCopilotApp/`
+
+Demonstrates how to integrate Microsoft.Agents.AI with GitHub Copilot for AI-powered code review.
+
+**Key Features**:
+- GitHub Copilot SDK integration
+- File-based code review workflow
+- Rule-based source code analysis
+- Claude model support via GitHub Copilot
+
+**What it does**: Creates an AI agent that reviews source code against coding standards defined in a rules file (`rule.md`). The agent analyzes code for naming conventions, security practices, architecture patterns, and documentation requirements.
+
+**Prerequisites**:
+- [GitHub Copilot CLI SDKs](https://github.com/github/copilot-sdk)
+- [GitHub Copilot CLI](https://docs.github.com/en/copilot/how-tos/copilot-cli/install-copilot-cli)
+
+**Running**:
+```powershell
+cd Sample10GitHubCopilotApp
+dotnet run
+```
+
+---
+
 ## Key Dependencies
 
 All projects use:
@@ -218,6 +243,7 @@ All projects use:
 Additional dependencies by project:
 - **Sample06DevUIApp**: `Microsoft.Agents.AI.DevUI`, `Microsoft.Agents.AI.Workflows`
 - **Sample07/08FunctionApp**: `Microsoft.Azure.Functions.Worker`, `Microsoft.Agents.AI.Hosting.AzureFunctions`
+- **Sample10GitHubCopilotApp**: `Microsoft.Agents.AI.GitHub.Copilot`, `GitHub.Copilot.SDK`
 
 ## Authentication
 
@@ -246,6 +272,7 @@ Recommended order to explore the samples:
 7. **Sample07** - Deploy to Azure Functions (basic)
 8. **Sample08** - Create MCP-enabled agents in Azure Functions
 9. **Sample09** - Build Teams agent apps with adaptive cards
+10. **Sample10** - Integrate with GitHub Copilot for code review
 
 ## Resources
 

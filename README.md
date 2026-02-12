@@ -1,6 +1,6 @@
-# MyAFSamples
+# My Agent Framework Samples
 
-A collection of sample applications demonstrating the **Microsoft.Agents.AI** framework with Azure OpenAI. These samples showcase various AI agent capabilities, from basic chat interactions to advanced features like function calling, structured outputs, workflows, and Azure Functions integration.
+A collection of sample applications demonstrating the **Microsoft Agents Framework**. These samples showcase various AI agent capabilities, from basic chat interactions to advanced features like function calling, structured outputs, workflows, and Azure Functions integration.
 
 ## Prerequisites
 

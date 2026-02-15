@@ -21,24 +21,25 @@ ChatClientAgentOptions agentOptions = new ChatClientAgentOptions
     }
 };
 
-AIAgent agent = chatClient.AsIChatClient().CreateAIAgent(agentOptions);
-AgentThread thread1 = agent.GetNewThread();
+AIAgent agent = chatClient.AsIChatClient().AsAIAgent(agentOptions);
+AgentSession session1 = await agent.CreateSessionAsync();
 Console.WriteLine(await agent.RunAsync(
     new Microsoft.Extensions.AI.ChatMessage(ChatRole.User,
-    "I’m a 25-year-old single male. I’m planning a 3-night hot-spring trip with three friends of the same age."), thread1));
+    "I’m a 25-year-old single male. I’m planning a 3-night hot-spring trip with three friends of the same age."), session1));
 Console.WriteLine("\n\n\n");
 
 // Serialize the thread to JSON and save it to a temporary file
-JsonElement serializedThread = thread1.Serialize();
+
+JsonElement serializedThread = await agent.SerializeSessionAsync(session1);
 string tempFilePath = Path.GetTempFileName();
 await File.WriteAllTextAsync(tempFilePath, JsonSerializer.Serialize(serializedThread));
 
 // Later, reload the thread from the temporary file
 JsonElement reloadedSerializedThread = JsonElement.Parse(await File.ReadAllTextAsync(tempFilePath));
-AgentThread resumedThread = agent.DeserializeThread(reloadedSerializedThread);
+AgentSession resumedSession = await agent.DeserializeSessionAsync(reloadedSerializedThread);
 
 Console.WriteLine(await agent.RunAsync(
     new Microsoft.Extensions.AI.ChatMessage(ChatRole.User,
     "Two women of the same age have been added for our trip. We also want stylish, Instagrammable food."),
-    resumedThread));
+    resumedSession));
 Console.WriteLine("End!");

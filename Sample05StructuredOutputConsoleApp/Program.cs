@@ -14,11 +14,10 @@ AIAgent agent = new AzureOpenAIClient(
     new AzureCliCredential())
     .GetChatClient(deploymentName)
     .AsIChatClient()
-    .CreateAIAgent(new ChatClientAgentOptions(name: "HumanAssistant",
-        instructions: "You are a helpful assistant. Predict each data even roughly from input as possible.")
-    {
-        ChatOptions = new()
-        {
+    .AsAIAgent(new ChatClientAgentOptions() { 
+        Name = "HumanAssistant",
+        ChatOptions = new (){
+            Instructions = "You are a helpful assistant. Predict each data even roughly from input as possible.",
             ResponseFormat = ChatResponseFormat.ForJsonSchema<PersonInfo>()
         }
     });

@@ -12,6 +12,6 @@ AIAgent agent = new AzureOpenAIClient(
     new Uri(endpoint),
     new AzureCliCredential())
     .GetChatClient(deploymentName)
-    .CreateAIAgent(instructions: "You are an agent to answer Joke of Seattle.", name: "myagent");
+    .AsIChatClient().AsAIAgent(instructions: "You are an agent to answer Joke of Seattle.", name: "myagent");
 
 Console.WriteLine(await agent.RunAsync("Tell me a joke about Seattle beer."));

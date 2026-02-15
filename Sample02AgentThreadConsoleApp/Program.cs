@@ -20,19 +20,19 @@ ChatClientAgentOptions agentOptions = new ChatClientAgentOptions
     }
 };
 
-AIAgent agent = chatClient.AsIChatClient().CreateAIAgent(agentOptions);
-AgentThread thread1 = agent.GetNewThread();
+AIAgent agent = chatClient.AsIChatClient().AsAIAgent(agentOptions);
+AgentSession session1 = await agent.CreateSessionAsync();
 Console.WriteLine(await agent.RunAsync(
     new Microsoft.Extensions.AI.ChatMessage(ChatRole.User,
-    "I’m a 25-year-old single male. I’m planning a 3-night hot-spring trip with three friends of the same age."), thread1));
+    "I’m a 25-year-old single male. I’m planning a 3-night hot-spring trip with three friends of the same age."), session1));
 Console.WriteLine("\n\n\n");
 
-AgentThread thread2 = agent.GetNewThread();
+AgentSession session2 = await agent.CreateSessionAsync();
 Console.WriteLine(await agent.RunAsync(
     new Microsoft.Extensions.AI.ChatMessage(ChatRole.User,
-    "’m a 41-year-old married man. I want a 2-night hot-spring trip with my wife and our 10-year-old daughter, and I want to make sure the child doesn’t get bored."), thread2));
+    "’m a 41-year-old married man. I want a 2-night hot-spring trip with my wife and our 10-year-old daughter, and I want to make sure the child doesn’t get bored."), session2));
 Console.WriteLine("\n\n\n");
 
 Console.WriteLine(await agent.RunAsync(
     new Microsoft.Extensions.AI.ChatMessage(ChatRole.User,
-    "Two women of the same age have been added for our trip. We also want stylish, Instagrammable food."), thread1));
+    "Two women of the same age have been added for our trip. We also want stylish, Instagrammable food."), session1));

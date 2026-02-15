@@ -3,6 +3,7 @@ using Azure.Identity;
 using Microsoft.Agents.AI;
 using Microsoft.Extensions.AI;
 using OpenAI;
+using OpenAI.Chat;
 using System.ComponentModel;
 using System.Net;
 using System.Text.Json;
@@ -25,6 +26,6 @@ AIAgent agent = new AzureOpenAIClient(
     new Uri(endpoint),
     new AzureCliCredential())
     .GetChatClient(deploymentName)
-    .CreateAIAgent(instructions: "You are a helpful assistant",
+    .AsAIAgent(instructions: "You are a helpful assistant",
     tools: [AIFunctionFactory.Create(GetHokkaidoCommunity)]);
 Console.WriteLine(await agent.RunAsync("What is the technical community for .NET in Tokyo?"));

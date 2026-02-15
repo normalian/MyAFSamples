@@ -12,8 +12,8 @@ class Program
     // Invoke-RestMethod -Uri http://localhost:7144/api/agents/TranslateAgent/run  -Method POST   -Headers @{ "Content-Type" = "text/plain" }   -Body "私を英語にしてください" 
     public static async Task Main(string[] args)
     {
-        string endpoint = "https://your-openai-endpoint.openai.azure.com/";
-        string deploymentName = "gpt-4.1-mini";
+        var endpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new InvalidOperationException("AZURE_OPENAI_ENDPOINT is not set.");
+        var deploymentName = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT_NAME") ?? "gpt-4.1-mini";
         var chatClient = new AzureOpenAIClient(new Uri(endpoint), new AzureCliCredential()).GetChatClient(deploymentName).AsIChatClient();
 
         AIAgent agent = new ChatClientAgent(
@@ -26,7 +26,7 @@ class Program
         using IHost app = FunctionsApplication
             .CreateBuilder(args)
             .ConfigureFunctionsWebApplication()
-            .ConfigureDurableAgents(options => options.AddAIAgent(agent))
+            .ConfigureDurableAgents(options => options.AddAIAgent(agent, timeToLive: TimeSpan.FromHours(1)))
             .Build();
         await app.RunAsync();
     }

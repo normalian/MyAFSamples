@@ -11,11 +11,11 @@ class Program
 {
     public static async Task Main(string[] args)
     {
-        string endpoint = "https://your-openai-endpoint.openai.azure.com/";
-        string deploymentName = "gpt-4.1-mini";
+        var endpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new InvalidOperationException("AZURE_OPENAI_ENDPOINT is not set.");
+        var deploymentName = Environment.GetEnvironmentVariable("AZURE_OPENAI_DEPLOYMENT_NAME") ?? "gpt-4.1-mini";
         AzureOpenAIClient client = new AzureOpenAIClient(new Uri(endpoint), new AzureCliCredential());
 
-        AIAgent agent = client.GetChatClient(deploymentName).AsIChatClient().CreateAIAgent(
+        AIAgent agent = client.GetChatClient(deploymentName).AsIChatClient().AsAIAgent(
             instructions: @"In this Normalian project, to facilitate management, class names must follow naming conventions based on business categories.
             Class names according to business categories are provided by the `GenerateClassNamingConvention` tool.
             Please define classes using the names provided here. Do not define classes with any other names.

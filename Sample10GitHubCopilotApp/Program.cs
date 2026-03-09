@@ -9,7 +9,7 @@ using Microsoft.Extensions.AI;
 
 // Initialize the Copilot client and the Agent, then establish a new session
 using var copilotClient = new CopilotClient();
-var config = new SessionConfig { Model = "claude-3.7-sonnet" };
+var config = new SessionConfig { Model = "claude-3.7-sonnet", OnPermissionRequest = PermissionHandler.ApproveAll };
 var agent = new GitHubCopilotAgent(copilotClient, config);
 await agent.CreateSessionAsync();
 

@@ -1,20 +1,27 @@
 # My Agent Framework Samples
 
-A collection of sample applications demonstrating the **Microsoft Agents Framework**. These samples showcase various AI agent capabilities, from basic chat interactions to advanced features like function calling, structured outputs, workflows, and Azure Functions integration.
+A collection of sample applications demonstrating the **Microsoft Agents Framework**. These samples showcase various AI agent capabilities, from basic chat interactions to advanced features like function calling, structured outputs, workflows, Azure Functions integration, Teams apps, GitHub Copilot, and Azure AI Foundry agent integration.
 
 ## Prerequisites
 
 - .NET 9.0 SDK
 - Azure OpenAI Service endpoint and deployment
 - Azure CLI (for authentication)
+- Azure AI Foundry project endpoint and pre-created agent version (for Sample11)
 
 ## Environment Variables
 
-All samples require the following environment variables:
+Samples `Sample01` to `Sample10` require the following environment variables:
 
 ```powershell
 $env:AZURE_OPENAI_ENDPOINT = "https://your-openai-endpoint.openai.azure.com/"
 $env:AZURE_OPENAI_DEPLOYMENT_NAME = "gpt-4.1-mini"  # or your deployment name
+```
+
+`Sample11FoundryBasicConsoleApp` requires:
+
+```powershell
+$env:MS_FOUNDRY_ENDPOINT = "https://<your-foundry-project-endpoint>"
 ```
 
 ## Samples Overview
@@ -203,7 +210,7 @@ A Microsoft Teams agent application that combines adaptive cards with Teams app 
 
 **What it does**: Demonstrates how to build an agent application for Microsoft Teams using adaptive cards for rich, interactive user experiences.
 
-For detailed setup instructions and configuration, please refer to the [Sample09M365Agent README](Sample09M365Agent/M365Agent/README.md).
+For detailed setup instructions and configuration, please refer to the [Sample09M365Agent README](Sample09M365Agent/README.md).
 
 ---
 
@@ -232,6 +239,32 @@ dotnet run
 
 ---
 
+### Sample11FoundryBasicConsoleApp - Azure AI Foundry Basic Agent Run
+**Location**: `Sample11FoundryBasicConsoleApp/`
+
+Demonstrates connecting to Azure AI Foundry and running an existing server-side agent version through `Microsoft.Agents.AI`.
+
+**Key Features**:
+- Azure AI Foundry client integration (`Azure.AI.Projects`)
+- Agent version lookup via project endpoint
+- `AIAgent` execution with `RunAsync`
+- `DefaultAzureCredential` authentication
+
+**What it does**: Connects to your Foundry project endpoint, resolves a target agent version, sends a prompt (`Please introduce yourself.`), and prints the response text.
+
+**Prerequisites**:
+- `MS_FOUNDRY_ENDPOINT` environment variable configured
+- Azure login completed (`az login`) or equivalent credential available to `DefaultAzureCredential`
+- Existing Foundry agent name/version configured in `Program.cs` (`agentname`, `version`)
+
+**Running**:
+```powershell
+cd Sample11FoundryBasicConsoleApp
+dotnet run
+```
+
+---
+
 ## Key Dependencies
 
 All projects use:
@@ -244,6 +277,7 @@ Additional dependencies by project:
 - **Sample06DevUIApp**: `Microsoft.Agents.AI.DevUI`, `Microsoft.Agents.AI.Workflows`
 - **Sample07/08FunctionApp**: `Microsoft.Azure.Functions.Worker`, `Microsoft.Agents.AI.Hosting.AzureFunctions`
 - **Sample10GitHubCopilotApp**: `Microsoft.Agents.AI.GitHub.Copilot`, `GitHub.Copilot.SDK`
+- **Sample11FoundryBasicConsoleApp**: `Azure.AI.Projects`, `Azure.AI.Projects.OpenAI`, `Microsoft.Agents.AI.AzureAI`
 
 ## Authentication
 
@@ -273,6 +307,7 @@ Recommended order to explore the samples:
 8. **Sample08** - Create MCP-enabled agents in Azure Functions
 9. **Sample09** - Build Teams agent apps with adaptive cards
 10. **Sample10** - Integrate with GitHub Copilot for code review
+11. **Sample11** - Connect to Azure AI Foundry and run a server-side agent version
 
 ## Resources
 

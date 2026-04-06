@@ -4,6 +4,7 @@ using Microsoft.Agents.Builder;
 using Microsoft.Agents.Builder.App;
 using Microsoft.Agents.Builder.State;
 using Microsoft.Agents.Core.Models;
+using Microsoft.Agents.Core.Serialization;
 using Microsoft.Extensions.AI;
 using Sample09M365Agent.Agents;
 using Sample09M365Agent.Models;
@@ -36,13 +37,13 @@ public class AFAgentApp : AgentApplication
         await turnContext.StreamingResponse.QueueInformativeUpdateAsync("Working on a response for you", cancellationToken);
 
         JsonElement threadElement = turnState.GetValue<JsonElement>("conversation.thread");
-        AgentThread agentThread = threadElement.ValueKind is not JsonValueKind.Undefined and not JsonValueKind.Null
-            ? _agent.DeserializeThread(threadElement, JsonUtilities.DefaultOptions)
-            : _agent.GetNewThread();
+        AgentSession agentSession = threadElement.ValueKind is not JsonValueKind.Undefined and not JsonValueKind.Null
+            ? await _agent.DeserializeSessionAsync(threadElement, JsonUtilities.DefaultOptions)
+            : await _agent.CreateSessionAsync();
 
         ChatMessage chatMessage = HandleUserInput(turnContext);
 
-        AgentRunResponse response = await _agent.RunAsync(chatMessage, agentThread, cancellationToken: cancellationToken);
+        AgentResponse response = await _agent.RunAsync(chatMessage, agentSession, cancellationToken: cancellationToken);
 
         List<Attachment> attachments = null;
         HandleUserInputRequests(response, ref attachments);
@@ -71,7 +72,7 @@ public class AFAgentApp : AgentApplication
             turnContext.StreamingResponse.FinalMessage = MessageFactory.Attachment(attachments);
         }
 
-        JsonElement threadElementEnd = agentThread.Serialize(JsonUtilities.DefaultOptions);
+        JsonElement threadElementEnd = agentSession.ToJsonElement();
         turnState.SetValue("conversation.thread", threadElementEnd);
 
         await turnContext.StreamingResponse.EndStreamAsync(cancellationToken);
@@ -117,7 +118,7 @@ public class AFAgentApp : AgentApplication
         return new ChatMessage(ChatRole.User, turnContext.Activity.Text);
     }
 
-    private static void HandleUserInputRequests(AgentRunResponse response, ref List<Attachment>? attachments)
+    private static void HandleUserInputRequests(AgentResponse response, ref List<Attachment>? attachments)
     {
         // Get requests where the LLM is attempting to call functions
         var toolCalls = response.Messages.SelectMany(m => m.Contents).OfType<FunctionCallContent>().ToList();

@@ -55,13 +55,27 @@ public class MySurveyAgent : DelegatingAIAgent
         return "SURVEY_REQUESTED";
     }
 
-    protected override async Task<AgentRunResponse> RunCoreAsync(IEnumerable<ChatMessage> messages, AgentThread thread = null, AgentRunOptions options = null, CancellationToken cancellationToken = default)
+    protected override async Task<AgentResponse> RunCoreAsync(IEnumerable<ChatMessage> messages, AgentSession session = null, AgentRunOptions options = null, CancellationToken cancellationToken = default)
     {
-        var response = await base.RunCoreAsync(messages, thread, options, cancellationToken);
+        var response = await base.RunCoreAsync(messages, session, options, cancellationToken);
 
         // If the agent returned a valid structured output response
         // we might be able to enhance the response with an adaptive card.
-        if (response.TryDeserialize<MySurveyAgentResponse>(JsonSerializerOptions.Web, out var structuredOutput))
+        MySurveyAgentResponse structuredOutput = null;
+        try
+        {
+            // Try to deserialize the response text to MySurveyAgentResponse
+            if (!string.IsNullOrEmpty(response.Text))
+            {
+                structuredOutput = JsonSerializer.Deserialize<MySurveyAgentResponse>(response.Text, JsonSerializerOptions.Web);
+            }
+        }
+        catch (JsonException)
+        {
+            // Ignore deserialization errors and leave structuredOutput as null
+        }
+
+        if (structuredOutput != null)
         {
             var textContentMessage = response.Messages.FirstOrDefault(x => x.Contents.OfType<TextContent>().Any());
             if (textContentMessage is not null)

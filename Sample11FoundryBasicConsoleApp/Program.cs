@@ -1,7 +1,8 @@
 ﻿using Azure.AI.Projects;
-using Azure.AI.Projects.OpenAI;
+using Azure.AI.Projects.Agents;
 using Azure.Identity;
 using Microsoft.Agents.AI;
+
 class Program
 {
     static async Task Main()
@@ -13,7 +14,7 @@ class Program
         var prompt = "Please introduce yourself.";
 
         AIProjectClient aiProjectClient = new(new Uri(endpoint), new DefaultAzureCredential());
-        AgentVersion agentVersion = aiProjectClient.Agents.GetAgentVersion(agentname, version);
+        ProjectsAgentVersion agentVersion = aiProjectClient.AgentAdministrationClient.GetAgentVersion(agentname, version);
 
         // You can use an AIAgent with an already created server side agent version.
         AIAgent agent = aiProjectClient.AsAIAgent(agentVersion);

@@ -7,6 +7,7 @@ using Microsoft.Agents.AI.Workflows;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.ComponentModel;
 
 var endpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") ?? throw new InvalidOperationException("AZURE_OPENAI_ENDPOINT is not set.");
@@ -39,6 +40,7 @@ builder.AddWorkflow("review-workflow", (sp, key) =>
 
 builder.Services.AddOpenAIResponses();
 builder.Services.AddOpenAIConversations();
+builder.AddDevUI();
 
 var app = builder.Build();
 app.MapOpenAIResponses();

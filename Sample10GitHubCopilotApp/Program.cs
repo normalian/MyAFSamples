@@ -1,4 +1,4 @@
-﻿using GitHub.Copilot.SDK;
+﻿using GitHub.Copilot;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.GitHub.Copilot;
 using Microsoft.Extensions.AI;

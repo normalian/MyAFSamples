@@ -1,5 +1,6 @@
-﻿using Azure.AI.OpenAI;
-using Azure.Identity;
+﻿extern alias AzureIdentity;
+using Azure.AI.OpenAI;
+using AzureIdentity::Azure.Identity;
 using Microsoft.Agents.AI;
 using Microsoft.Agents.AI.Hosting.AzureFunctions;
 using Microsoft.Azure.Functions.Worker.Builder;
